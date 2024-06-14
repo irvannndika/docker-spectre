@@ -17,7 +17,5 @@ FROM rust:bookworm AS builder
 
 RUN cargo install wasm-pack
 RUN rustup target add wasm32-unknown-unknown
-RUN git clone https://github.com/spectre-project/rusty-spectre
-WORKDIR $HOME/rusty-spectre/
-RUN cargo run --release --bin spectred
+RUN git clone https://github.com/spectre-project/rusty-spectre && cd rusty-spectre
 CMD ["/$HOME/rusty-spectre"]
