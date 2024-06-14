@@ -10,6 +10,20 @@ libclang-dev libclang1 liblldb-dev \
 libllvm-ocaml-dev libomp-dev libomp5 \
 lld lldb llvm-dev llvm-runtime \
 llvm python3-clang -y
+
+# Build stage
+FROM rust:bookworm AS builder
+
+WORKDIR /$HOME
+COPY . .
+RUN cargo build --release
+
+# Final run stage
+FROM debian:bookworm-slim AS runner
+
+WORKDIR /$HOME
+COPY --from=builder /$HOME/target/release/rusty-spectre /$HOME/rusty-spectre
+
 RUN cargo install wasm-pack
 RUN rustup target add wasm32-unknown-unknown
 RUN git clone https://github.com/spectre-project/rusty-spectre
