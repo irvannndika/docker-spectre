@@ -1,8 +1,8 @@
 FROM ubuntu:focal
 
-
-RUN apt install curl git build-essential libssl-dev pkg-config 
-RUN apt install protobuf-compiler libprotobuf-dev
+RUN apt-get update -y
+RUN apt-get install curl git build-essential libssl-dev pkg-config 
+RUN apt-get install protobuf-compiler libprotobuf-dev
 RUN apt-get install clang-format clang-tidy \
 clang-tools clang clangd libc++-dev \
 libc++1 libc++abi-dev libc++abi1 \
