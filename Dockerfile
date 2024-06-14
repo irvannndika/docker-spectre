@@ -15,14 +15,11 @@ llvm python3-clang -y
 FROM rust:bookworm AS builder
 
 WORKDIR /$HOME
-COPY . .
-RUN cargo build --release
 
 # Final run stage
 FROM debian:bookworm-slim AS runner
 
 WORKDIR /$HOME
-COPY --from=builder /$HOME/target/release/rusty-spectre /$HOME/rusty-spectre
 
 RUN cargo install wasm-pack
 RUN rustup target add wasm32-unknown-unknown
