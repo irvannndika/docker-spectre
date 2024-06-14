@@ -14,12 +14,6 @@ llvm python3-clang -y
 # Build stage
 FROM rust:bookworm AS builder
 
-WORKDIR /$HOME
-
-# Final run stage
-FROM debian:bookworm-slim AS runner
-
-WORKDIR /$HOME
 
 RUN cargo install wasm-pack
 RUN rustup target add wasm32-unknown-unknown
